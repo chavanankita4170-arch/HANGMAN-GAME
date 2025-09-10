@@ -1,0 +1,53 @@
+# Simple Stock Tracker
+
+# Hardcoded stock prices dictionary
+stock_prices = {
+    "AAPL": 180,
+    "TSLA": 250,
+    "GOOG": 135,
+    "MSFT": 300
+}
+
+# Function to calculate investment
+def calculate_investment():
+    total_investment = 0
+    investments = {}
+
+    while True:
+        stock = input("Enter stock symbol (AAPL/TSLA/GOOG/MSFT or 'done' to finish): ").upper()
+        
+        if stock == "DONE":
+            break
+        elif stock not in stock_prices:
+            print("Stock not found in price list!")
+            continue
+
+        try:
+            quantity = int(input(f"Enter quantity of {stock}: "))
+        except ValueError:
+            print("Invalid input! Please enter a number.")
+            continue
+
+        # Calculate value
+        value = stock_prices[stock] * quantity
+        investments[stock] = investments.get(stock, 0) + value
+        total_investment += value
+
+    # Display results
+    print("\n--- Investment Summary ---")
+    for stock, value in investments.items():
+        print(f"{stock}: ${value}")
+    print(f"Total Investment: ${total_investment}")
+
+    # Optionally save to file
+    choice = input("Save result to file? (y/n): ").lower()
+    if choice == "y":
+        with open("investment_summary.txt", "w") as file:
+            file.write("--- Investment Summary ---\n")
+            for stock, value in investments.items():
+                file.write(f"{stock}: ${value}\n")
+            file.write(f"Total Investment: ${total_investment}\n")
+        print("Investment summary saved to 'investment_summary.txt'")
+
+# Run the program
+calculate_investment()
