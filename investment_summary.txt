@@ -1,0 +1,5 @@
+--- Investment Summary ---
+AAPL: $180900
+TSLA: $500
+MSFT: $300
+Total Investment: $181700
